@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderComponent from "./Header";
-import BodyComponent from "./Body";
+import Header from "./Header";
+import { Outlet } from "react-router-dom";
 // project structure
 
 /**
@@ -24,8 +24,8 @@ import BodyComponent from "./Body";
 const AppLayout = () => {
   return (
     <div className="app">
-      <HeaderComponent />
-      <BodyComponent />
+      <Header />
+      <Outlet />
     </div>
   );
 };
