@@ -1,24 +1,14 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { RESTAURANT_MENU_URL } from "../utils/constants";
 import { RESTAURANT_MENU_IMAGE_URL } from "../utils/constants";
+import useRestaurantInfo from "../utils/useRestaurantInfo";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
-  const [restaurantInfo, setRestauraInfo] = useState([]);
-
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  const restaurantInfo = useRestaurantInfo(resId);
 
-  const fetchMenu = async () => {
-    const data = await fetch(RESTAURANT_MENU_URL + resId);
-    const json = await data.json();
-    setRestauraInfo(json);
-  };
   if (restaurantInfo.length === 0) return <Shimmer />;
 
   const {
@@ -34,27 +24,36 @@ const RestaurantMenu = () => {
 
   return (
     <>
-      <div className="restaurant-info">
-        <h1>{name}</h1>
-        <p>{cuisines.join(", ")}</p>
+      <div className="mb-6 ml-6">
+        <h1 className="font-semibold text-xl my-4">{name}</h1>
+        <p className="">
+          cuisines: <span className="font-semibold">{cuisines.join(", ")}</span>
+        </p>
         <p>
           {city}, {sla.lastMileTravel} Km
         </p>
       </div>
 
-      <h1>Menu</h1>
+      <h1 className="font-semibold text-xl ml-6">Menu</h1>
 
       <ul>
         {itemCards.map((item) => (
-          <div key={item?.card?.info?.id} className="menu">
-            <li>
-              <p>
-                {item?.card?.info?.name} - Rs{" "}
-                {item?.card?.info?.price / 100 ||
-                  item?.card?.info?.defaultPrice / 100}
-              </p>
+          <div key={item?.card?.info?.id} className="h-30">
+            <li className="flex justify-between items-center m-4 p-4 border-b-2">
+              <div>
+                <p className="font-medium">{item?.card?.info?.name}</p>
+                <p className="text-xs py-2">
+                  Rs{" "}
+                  {item?.card?.info?.price / 100 ||
+                    item?.card?.info?.defaultPrice / 100}
+                </p>
+                <p className="text-xs font-thin">
+                  {item?.card?.info?.description}
+                </p>
+              </div>
+
               <img
-                className="menu-image"
+                className="h-24 p-2 rounded-xl"
                 src={RESTAURANT_MENU_IMAGE_URL + item?.card?.info?.imageId}
               />
             </li>
