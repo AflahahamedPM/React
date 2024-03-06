@@ -8,7 +8,6 @@ class UserClass extends React.Component {
 
         }
     };
-    console.log("child constructor");
   }
 
   async componentDidMount() {
@@ -17,14 +16,12 @@ class UserClass extends React.Component {
 
     this.setState({userInfo:json})
 
-    console.log("child CDM");
   }
 
   componentDidUpdate(){
     console.log("child component did update");
   }
   render() {
-    console.log("child render");
 
     const{name} = this?.state?.userInfo;
     return (

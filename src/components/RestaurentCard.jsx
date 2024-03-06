@@ -13,12 +13,25 @@ const RestaurentCard = (props) => {
         alt="restaurent-logo"
       />
       <h3 className="py-3 text-lg font-semibold">{name}</h3>
-      <h5 className="restaurent-cuisine">{cuisines.join(", ")}</h5>
-      <h5 className="restaurent-rating">{avgRating} Stars</h5>
-      <h4 className="restaurent-deliverytime">{sla.deliveryTime} Minutes</h4>
+      <h5 className="">{cuisines.join(", ")}</h5>
+      <h5 className="">{avgRating} Stars</h5>
+      <h4 className="">{sla.deliveryTime} Minutes</h4>
       </Link>
     </div>
   );
 };
+
+export const withPromotedLabel = (RestaurentCard) => {
+
+  return(props) => {
+    return(
+      <div>
+      <label className="absolute m-4 p-2 bg-black text-white rounded-xl">Promoted</label>
+      < RestaurentCard {...props}/>
+      </div>
+    )
+  }
+
+}
 
 export default RestaurentCard;

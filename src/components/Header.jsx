@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 const HeaderComponent = () => {
   const [btnName, setBtnName] = useState("Log In");
   return (
-    <div className="header flex justify-between">
+    <div className="flex justify-between">
       <div className="items-center mr-24">
         <img className="logo ml-8 mt-4 w-24" src={image} />
       </div>
       <div className="flex items-center">
-        <ul className="nav-routes flex mr-36 gap-16 mt-8 text-lg">
+        <ul className="flex mr-36 gap-16 mt-8 text-lg">
           <li>
             <Link to="/">Home</Link>
           </li>
